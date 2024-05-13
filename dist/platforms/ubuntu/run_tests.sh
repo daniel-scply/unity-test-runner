@@ -118,6 +118,34 @@ if [ "$PACKAGE_MODE" = "true" ]; then
       > "$PACKAGE_MANIFEST_PATH"
   fi
 
+  # Add extra dependencies if defined
+  if [ -z "$EXTRA_DEPENDENCIES" ]; then
+    echo "No extra dependencies defined."
+  else
+    PACKAGE_MANIFEST_JSON=$(cat "$PACKAGE_MANIFEST_PATH")
+
+    echo "Adding extra dependencies to the package manifest..."
+    echo "$PACKAGE_MANIFEST_JSON" | \
+      jq \
+      --argjson extraDependencies "$EXTRA_DEPENDENCIES" \
+      '.dependencies += $extraDependencies' \
+      > "$PACKAGE_MANIFEST_PATH"
+  fi
+
+  # Add extra testables if defined
+  if [ -z "$EXTRA_TESTABLES" ]; then
+    echo "No extra testables defined."
+  else
+    PACKAGE_MANIFEST_JSON=$(cat "$PACKAGE_MANIFEST_PATH")
+
+    echo "Adding extra testables to the package manifest..."
+    echo "$PACKAGE_MANIFEST_JSON" | \
+      jq \
+      --argjson extraTestables "$EXTRA_TESTABLES" \
+      '.testables += $extraTestables' \
+      > "$PACKAGE_MANIFEST_PATH"
+  fi
+
   UNITY_PROJECT_PATH="$TEMP_PROJECT_PATH"
 
   if [ -n "$PRIVATE_REGISTRY_TOKEN" ]; then
