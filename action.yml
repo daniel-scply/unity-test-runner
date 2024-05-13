@@ -56,6 +56,14 @@ inputs:
     required: false
     default: false
     description: 'Whether the tests are being run for a Unity package instead of a Unity project. If true, the action can only be run on Linux runners, and any custom docker image passed to this action must have `jq` installed. NOTE: may not work properly for packages with dependencies outside of the Unity Registry.'
+  extraDependencies:
+    required: false
+    default: ''
+    description: 'Extra dependencies to be added to the main project's manfiest. Only applicable if packageMode is true.'
+  extraTestables:
+    required: false
+    default: ''
+    description: 'Extra testables to be added to the main project's manfiest. Only applicable if packageMode is true.'
   scopedRegistryUrl:
     required: false
     default: ''

@@ -118,6 +118,8 @@ if [ "$PACKAGE_MODE" = "true" ]; then
       > "$PACKAGE_MANIFEST_PATH"
   fi
 
+  EXTRA_DEPENDENCIES='{"com.scopely.sdk.core": "file:../../scopely-sdk-core","com.playgami.sdk.gradlewrapper": "file:../../playgami-sdk-gradlewrapper"}'
+
   # Add extra dependencies if defined
   if [ -z "$EXTRA_DEPENDENCIES" ]; then
     echo "No extra dependencies defined."
@@ -131,6 +133,8 @@ if [ "$PACKAGE_MODE" = "true" ]; then
       '.dependencies += $extraDependencies' \
       > "$PACKAGE_MANIFEST_PATH"
   fi
+
+  EXTRA_TESTABLES='["com.scopely.sdk.core", "com.playgami.sdk.gradlewrapper"]'
 
   # Add extra testables if defined
   if [ -z "$EXTRA_TESTABLES" ]; then
