@@ -134,7 +134,7 @@ if [ "$PACKAGE_MODE" = "true" ]; then
       > "$PACKAGE_MANIFEST_PATH"
   fi
 
-  EXTRA_TESTABLES='["com.scopely.sdk.core"]'
+  EXTRA_TESTABLES='["com.scopely.sdk.core", "com.playgami.sdk.gradlewrapper"]'
 
   # Add extra testables if defined
   if [ -z "$EXTRA_TESTABLES" ]; then
